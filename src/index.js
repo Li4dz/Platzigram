@@ -19,8 +19,9 @@ console.log(numerosMasUno);
 // var yo = require('yo-yo');
 // var empty = require('empty-element');
 
-var page = require('page');
+import page from 'page';
 require('./homepage');
 require('./signup');
+require('./signin');
 
 page();

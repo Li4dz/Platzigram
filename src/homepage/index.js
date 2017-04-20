@@ -1,6 +1,8 @@
 import page from 'page';
+import template from './template';
 
-page('/', function (ctx, next) {
-  var main = document.getElementById('main-container');
-  main.innerHTML = '<a href="/signup">Signup</a>';
-})
+page('/', (ctx, next) => {
+    $('title').html('Plaztigram');
+    var main = $('#main-container');
+    main.empty().append(template);
+});

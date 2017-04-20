@@ -16,7 +16,7 @@ var preset =  require('babel-preset-es2015');
 var watchify = require('watchify');
 
 /*Tarea para generar un archivo sass y convertilo en css*/
-gulp.task('styles', function (){
+gulp.task('styles', () => {
     gulp
         .src('index.scss')
         .pipe(sass())
@@ -25,7 +25,7 @@ gulp.task('styles', function (){
 });
 
 /*Tarea para copiar los archivos de carpeta assets a otra llamada public*/ 
-gulp.task('assets', function (){
+gulp.task('assets', () => {
     gulp
         .src('assets/*')
         .pipe(gulp.dest('public'));
@@ -39,13 +39,14 @@ function compile(watch) {
     bundle
       .transform(babel, preset)
       .bundle()
+      .on('error', (err) => { console.log(err); this.emit(end)  })
       .pipe(source('index.js'))
       .pipe(rename('app.js'))
       .pipe(gulp.dest('public'));
   }
 
   if (watch) {
-    bundle.on('update', function () {
+    bundle.on('update', () => {
       console.log('--> Bundling...');
       rebundle();
     });
@@ -66,11 +67,11 @@ function compile(watch) {
 //         .pipe(gulp.dest('public'));
 // });
 
-gulp.task('build', function () {
+gulp.task('build', () => {
   return compile();
 });
 
-gulp.task('watch', function () { return compile(true); });
+gulp.task('watch', () => { return compile(true); });
 
 
 /*Con el comando gulp se podrán generar las tareas establecidas por la función task*/
